@@ -1,0 +1,190 @@
+﻿@model Periodicals.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Регистрация";
+    
+}
+<div class="container">
+    <h2>@ViewBag.Title.</h2>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Создайте новую учетную запись.</h4>
+        <hr/>
+
+        <div>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new {@for = "username", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-users fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.Email, new {@class = "form-control", @id = "Email", @name = "Email", @placeholder = Html.DisplayNameFor(model => model.Email) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new {@for = "name", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control", @id = "name", @name = "name", @placeholder = Html.DisplayNameFor(model => model.FirstName) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new {@for = "lastname", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.LastName, new {@class = "form-control", @id = "lastname", @name = "lastname", @placeholder = Html.DisplayNameFor(model => model.LastName) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MobilePhone, new {@for = "email", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.MobilePhone, new {@class = "form-control", @id = "MobilePhone", @name = "MobilePhone", @placeholder = Html.DisplayNameFor(model => model.MobilePhone) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.MobilePhone)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, new {@for = "email", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.City, new {@class = "form-control", @id = "city", @name = "city", @placeholder = Html.DisplayNameFor(model => model.City) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Index, new {@for = "email", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                    </span>
+                    @Html.TextBoxFor(model => model.Index, new {@class = "form-control", @id = "Index", @name = "Index", @placeholder = Html.DisplayNameFor(model => model.Index) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.Index)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new {@for = "password", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    @Html.PasswordFor(model => model.Password, new {@class = "form-control", @id = "password", @name = "password", @placeholder = Html.DisplayNameFor(model => model.Password) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new {@for = "passwordconfirm", @class = "cols-sm-2 control-label"})
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    @Html.PasswordFor(model => model.ConfirmPassword, new {@class = "form-control", @id = "ConfirmPassword", @name = "ConfirmPassword", @placeholder = Html.DisplayNameFor(model => model.ConfirmPassword) })
+                </div>
+                <div class="input-group">
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Регистрация</button>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+        @*@Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Email), autofocus = "" })
+        <div>
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <br>
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.FirstName) })
+        <div>
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+        </div>
+                <br />
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.LastName) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.TextBoxFor(model => model.MobilePhone, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.MobilePhone) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.MobilePhone, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.City) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.TextBoxFor(model => model.Index, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Index) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Index, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Password) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.ConfirmPassword) })
+                <div>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Регистрация" />
+                    </div>
+                </div>*@
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
