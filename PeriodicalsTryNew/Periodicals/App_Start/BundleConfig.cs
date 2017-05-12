@@ -23,9 +23,13 @@ namespace Periodicals
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                     "~/Scripts/list-of-publications.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/bootstrap.css",
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/small-business.css"));
         }
     }
 }
