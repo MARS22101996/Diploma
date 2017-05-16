@@ -32,8 +32,8 @@
     </p>
     @if (User.IsInRole("Admin"))
     {
-        <span>@Html.ActionLink("Редактировать", "Edit1", new {controller = "Topics", id = (int) ViewBag.Topic1}, new {@class = "btn btn-default"})</span>
-        <span>@Html.ActionLink("Удалить", "Delete", new {controller = "Topics", id = (int) ViewBag.Topic1}, new {@class = "btn btn-default"})</span>
+        @*<span>@Html.ActionLink("Редактировать", "Edit1", new {controller = "Topics", id = (int) ViewBag.Topic1}, new {@class = "btn btn-default"})</span>
+        <span>@Html.ActionLink("Удалить", "Delete", new {controller = "Topics", id = (int) ViewBag.Topic1}, new {@class = "btn btn-default"})</span>*@
     }
     @using (Ajax.BeginForm("PublicationSearch", "Publications", new {topicId = (int) ViewBag.Topic1}, new AjaxOptions
     {
@@ -41,82 +41,96 @@
         HttpMethod = "POST"
     }))
     {
-        <input type="text" name="name"/>
-        <input class="btn btn-default" type="submit" value="Поиск"/>
+        <p>
+
+        </p>
+        <input type="text" class="form-control" name="name"/>
+        <p>
+
+        </p>
+        <div class="text-center">
+            <input class="btn btn-default" type="submit" value="Поиск" />
+        </div>
+        <p>
+
+        </p>
     }
-    <span>@Ajax.ActionLink("Сортировать по названию", "OrderByName", new {topicId = (int) ViewBag.Topic1}, new AjaxOptions {UpdateTargetId = "results"}, new {@class = "btn btn-default"})</span>
-    <span>@Ajax.ActionLink("Сортировать по цене", "OrderByPrice", new {topicId = (int) ViewBag.Topic1}, new AjaxOptions {UpdateTargetId = "results"}, new {@class = "btn btn-default"})</span>
 
-    <hr />
-    <div id="results">
-        @{
-            int i = 0;
-            int ch = 0;
-        }
+    <div class="text-center">
+        <span>@Ajax.ActionLink("Сортировать по названию", "OrderByName", new { topicId = (int)ViewBag.Topic1 }, new AjaxOptions { UpdateTargetId = "results" }, new { @class = "btn btn-default" })</span>
+        <span>@Ajax.ActionLink("Сортировать по цене", "OrderByPrice", new { topicId = (int)ViewBag.Topic1 }, new AjaxOptions { UpdateTargetId = "results" }, new { @class = "btn btn-default" })</span>
+    </div>
 
-        <div id="products" class="row list-group">
-            @foreach (var item in Model)
+        <hr />
+        <div id="results">
+            @{
+                int i = 0;
+                int ch = 0;
+            }
+
+            <div id="products" class="row list-group">
+                @foreach (var item in Model)
             {
                 i++;
-                <div class="item  col-xs-4 col-lg-4">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("Details", new {id = item.PublicationId})">
-                            <img class="group list-group-image" src="@Url.Action("GetImagePublication", new {id = item.PublicationId})" alt=""/>
-                        </a>
-                        <div class="caption">
-                            <div class="title">
-                                <h4 class="pull-right">@Html.DisplayFor(modelItem => item.PricePerMonth) грн.</h4>
-                                <h4>
-                                    @Html.DisplayFor(modelItem => item.NameOfPublication)
-                                </h4>
-                            </div>
-                            <hr/>
-                            <p class="group inner list-group-item-text">
-                                @if (item.Description.Length < 200)
-                                {
+                    <div class="item  col-xs-4 col-lg-4">
+                        <div class="thumbnail">
+                            <a href="@Url.Action("Details", new {id = item.PublicationId})">
+                                <img class="group list-group-image" src="@Url.Action("GetImagePublication", new {id = item.PublicationId})" alt="" />
+                            </a>
+                            <div class="caption">
+                                <div class="title">
+                                    <h4 class="pull-right">@Html.DisplayFor(modelItem => item.PricePerMonth) грн.</h4>
+                                    <h4>
+                                        @Html.DisplayFor(modelItem => item.NameOfPublication)
+                                    </h4>
+                                </div>
+                                <hr />
+                                <p class="group inner list-group-item-text">
+                                    @if (item.Description.Length < 200)
+                                    {
                                     <p>
                                         @item.Description
 
                                     </p>
-                                }
-                                else
-                                {
-                                    <p>
-                                        @item.Description.Substring(0, 200)
-
-                                        ...
-                                    </p>
-                                }
-                            </p>
-                            <hr/>
-                            <div class="row">
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <span>@Html.ActionLink("Редактировать", "Edit", new {id = item.PublicationId}, new {@class = "btn btn-default"})</span>
-                                    <span>@Html.ActionLink("Удалить", "Delete", new {id = item.PublicationId}, new {@class = "btn btn-default"})</span>
-                                }
-
-                            </div>
-                            <div class="row">
-                                @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin") && !User.IsInRole("Support"))
-                                {
-                                    string namediv = "result" + i;
-                                    foreach (var p in item.UserPublications)
-                                    {
-                                        if (p.UserId == User.Identity.GetUserId())
-                                        {
-                                            ch++;
-                                        }
                                     }
-                                    if (ch == 0)
+                                    else
                                     {
-                                        <div id=@namediv>
-                                            @using (Ajax.BeginForm("CreateSubscription", "UserPublications", new {id = item.PublicationId}, new AjaxOptions
+                                        <p>
+                                            @item.Description.Substring(0, 200)
+
+                                            ...
+                                        </p>
+                                    }
+                                    </p>
+                                    <hr />
+                                    <div class="row">
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <span>@Html.ActionLink("Редактировать", "Edit", new { id = item.PublicationId }, new { @class = "btn btn-default" })</span>
+                                            <span>@Html.ActionLink("Удалить", "Delete", new { id = item.PublicationId }, new { @class = "btn btn-default" })</span>
+                                        }
+
+                                    </div>
+                                    <div class="row">
+                                        @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin") && !User.IsInRole("Support"))
+                                        {
+                                            string namediv = "result" + i;
+                                            foreach (var p in item.UserPublications)
                                             {
-                                                UpdateTargetId = namediv
-                                            }))
+                                                if (p.UserId == User.Identity.GetUserId())
+                                                {
+                                                    ch++;
+                                                }
+                                            }
+                                            if (ch == 0)
                                             {
-                                                @Html.DropDownList("name", new SelectList(
+                                                <div id=@namediv>
+                                                    @using (Ajax.BeginForm("CreateSubscription", "UserPublications", new { id = item.PublicationId }, new AjaxOptions
+                                                    {
+                                                        UpdateTargetId = namediv
+                                                    }))
+                                                    {
+                                                        @Html.DropDownList("name", new SelectList(
                                                     new List<Object>
                                                     {
                                                         new {value = "1", text = "1 месяц"},
@@ -134,37 +148,37 @@
                                                     },
                                                     "value",
                                                     "text",
-                                                    "1"), htmlAttributes: new {@class = "form-control"})
-                                                    @*</div>*@
-                                                <div class="row">
-                                                    <p>
-                                                        
-                                                    </p>
-                                                    <span>
-                                                        <input type="submit" value="Подписаться" class="btn btn-default" id="op-accept"/>
-                                                    </span>
+                                                    "1"), htmlAttributes: new { @class = "form-control" })
+                                                        @*</div>*@
+                                                        <div class="row">
+                                                            <p>
+
+                                                            </p>
+                                                            <span>
+                                                                <input type="submit" value="Подписаться" class="btn btn-default" id="op-accept" />
+                                                            </span>
+                                                        </div>
+                                                    }
                                                 </div>
                                             }
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <p>
-                                            Вы подписаны на это издание
-                                        </p>
-                                    }
-                                    ch = 0;
-                                }
+                                            else
+                                            {
+                                                <p>
+                                                    Вы подписаны на это издание
+                                                </p>
+                                            }
+                                            ch = 0;
+                                        }
+                                    </div>
+                                </div>
+
                             </div>
+
                         </div>
-
-                    </div>
-
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
-</div>
 
 @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")

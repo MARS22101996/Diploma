@@ -6,63 +6,83 @@
 }
 
 <h2>@Html.DisplayFor(model => model.NameOfPublication)</h2>
+<hr />
 
-<div>  
-    <hr/>
-    <p></p>
-    <div class="content">
-        <div class="pic">
-            <img src="@Url.Action("GetImagePublication",  new {id = Model.PublicationId})" />          
-        </div>
-        <div class="text">
-            <p>
-                @Model.Description
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-4">
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1"><img src="@Url.Action("GetImagePublication",  new {id = Model.PublicationId})" /></div>
+                    </div>
+                </div>
+                <div class="details col-md-8">
+                    <div class="panel panel-default text-center">
+                        <div class="rating">
+                            <h3><div class="panel-title"> Категория </div></h3>
+                            <hr>
+                            @foreach (var i in Model.Topics)
+                            {
+                                <p class="detail-font"> @i.NameOfTopic </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="panel panel-default text-center">
+                        <h3><div class="panel-title"> Описание </div></h3>
+                        <hr>
+                        <p class="detail-font"> @Model.Description </p>
+                    </div>
+                    <div class="panel panel-default text-center">
+                        <h3><div class="panel-title"> Цена </div></h3>
+                        <hr>
+                        <h2><font color="grey">@Html.DisplayFor(model => model.PricePerMonth) грн.</h2>   </font>
+                    </div>
+                    <div class="panel panel-default text-center">
+                        <h3><div class="panel-title"> Дополнительная информация </div></h3>
+                        <hr>
+                        <span class="input-group-addon">
+                                 <dl class="dl-horizontal">
 
-            </p>
-            <p class="price"><strong>Цена, грн./мес. :</strong> @Html.DisplayFor(model => model.PricePerMonth) грн. </p>
+                                     <dt>
+                                         Периодичность
+                                     </dt>
+
+                                     <dd>
+                                         @Html.DisplayFor(model => model.Periodicity)
+                                     </dd>
+
+                                     <dt>
+                                         Формат
+                                     </dt>
+
+                                     <dd>
+                                         @Html.DisplayFor(model => model.Format)
+                                     </dd>
+
+                                     <dt>
+                                         Цвет
+                                     </dt>
+
+                                     <dd>
+                                         @Html.DisplayFor(model => model.Color)
+                                     </dd>
+
+                                     <dt>
+                                         Объем, стр.
+                                     </dt>
+
+                                     <dd>
+                                         @Html.DisplayFor(model => model.Volume)
+                                     </dd>
+                                 </dl>
+                           </span>
+                        <br>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <dl class="dl-horizontal">
-
-        <dt>
-            Периодичность
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Periodicity)
-        </dd>
-
-        <dt>
-            Формат
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Format)
-        </dd>
-
-        <dt>
-            Цвет
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-
-        <dt>
-            Объем, стр.
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Volume)
-        </dd>
-    </dl>
-
-    @foreach (var i in Model.Topics)
-    {
-        <span class="btn btn-info"> @i.NameOfTopic  </span>
-    }
 </div>
-<p>
-
-    @Html.ActionLink("Назад", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
-</p>
+<br>
+<br>

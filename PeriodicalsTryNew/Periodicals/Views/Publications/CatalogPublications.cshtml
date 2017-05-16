@@ -6,73 +6,214 @@
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 <link rel="stylesheet" type="text/css" href="~/Content/StylePDF.css" />
+ <!-- Custom Fonts -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
 
 <body>
     <div id="firstpage">
-
     </div>
-    
-    @foreach (var item in Model)
-    {
-        <div class="content">
-            <H2>
-                @Html.DisplayFor(modelItem => item.NameOfPublication)
-            </H2>
-            <div class="conteiner">
-                <div class="pic">          
-                   <img src="@Url.Action("GetImagePublication",  new {id = item.PublicationId})" height="250" />               
+        @foreach (var item in Model)
+        {
+            @*<div class="card">
+                <div class="container-fliud">
+                    <div class="wrapper row">
+                        <div class="preview col-md-4">
+                            <div class="preview-pic tab-content">
+                                <div class="tab-pane active" id="pic-1"><img src="@Url.Action("GetImagePublication",  new {id = item.PublicationId})" /></div>
+                            </div>
+                        </div>
+                        <div class="details col-md-8">
+                            <div class="panel panel-default text-center">
+                                <div class="rating">
+                                    <h3><div class="panel-title"> Категория </div></h3>
+                                    <hr>
+                                    @foreach (var i in item.Topics)
+                                    {
+                                        <p class="detail-font"> @i.NameOfTopic </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="panel panel-default text-center">
+                                <h3><div class="panel-title"> Описание </div></h3>
+                                <hr>
+                                <p class="detail-font"> @item.Description </p>
+                            </div>
+                            <div class="panel panel-default text-center">
+                                <h3>
+                                    <div class="panel-title"> Цена </div>
+                                </h3>
+                                <hr>
+                                <h2>@Html.DisplayFor(model => item.PricePerMonth) грн.</h2>
+                            </div>
+                            <div class="panel panel-default text-center">
+                                <h3><div class="panel-title"> Дополнительная информация </div></h3>
+                                <hr>
+                                <span class="input-group-addon">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>
+                                            Периодичность
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.Periodicity)
+                                        </dd>
+
+                                        <dt>
+                                            Формат
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.Format)
+                                        </dd>
+
+                                        <dt>
+                                            Цвет
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.Color)
+                                        </dd>
+
+                                        <dt>
+                                            Объем, стр.
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.Volume)
+                                        </dd>
+                                    </dl>
+                                </span>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
+            </div>*@
+            <div class="content">
+                <H2>
+                    @Html.DisplayFor(modelItem => item.NameOfPublication)
+                </H2>
+                <hr />
+                    <div class="conteiner">
+                        <div class="pic">
+                            <img src="@Url.Action("GetImagePublication", new {id = item.PublicationId})" height="250" />
+                        </div>
+                        <div class="text">
+                            @*<div class="panel panel-default text-center">*@
+                                <p>
+                                    @item.Description
+                                </p>
+                            @*</div>*@
+                        </div>
+                    </div>
                     <p>
-                        @item.Description
                     </p>
-                </div>
-            </div>
-            <p>
+                    <div class="fortable">
+                        <div class="tab">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>
+                                        Периодичность
+                                    </th>
+                                    <th>
+                                        Формат
+                                    </th>
+                                    <th>
+                                        Цвет
+                                    </th>
+                                    <th>
+                                        Объем, стр.
+                                    </th>
+                                    <th>
+                                        Цена, грн
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Periodicity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Format)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Color)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Volume)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PricePerMonth)
+                                    </td>
+                                </tr>
 
-            </p>
-            <div class="fortable">
-                <div class="tab">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Периодичность
-                            </th>
-                            <th>
-                                Формат
-                            </th>
-                            <th>
-                                Цвет
-                            </th>
-                            <th>
-                                Объем, стр.
-                            </th>
-                            <th>
-                                Цена, грн
-                            </th>
+                            </table>
+                        </div>
+                    </div>
+</div>
+        }
+        @*</div>*@
+            @*</div>*@
+            @*<div class="content">
+                    <H2>
+                        @Html.DisplayFor(modelItem => item.NameOfPublication)
+                    </H2>
+                    <div class="conteiner">
+                        <div class="pic">
+                           <img src="@Url.Action("GetImagePublication",  new {id = item.PublicationId})" height="250" />
+                        </div>
+                        <div class="text">
+                            <p>
+                                @item.Description
+                            </p>
+                        </div>
+                    </div>
+                    <p>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Periodicity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Format)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Color)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Volume)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PricePerMonth)
-                            </td>
-                        </tr>
+                    </p>
+                    <div class="fortable">
+                        <div class="tab">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Периодичность
+                                    </th>
+                                    <th>
+                                        Формат
+                                    </th>
+                                    <th>
+                                        Цвет
+                                    </th>
+                                    <th>
+                                        Объем, стр.
+                                    </th>
+                                    <th>
+                                        Цена, грн
+                                    </th>
 
-                    </table>
-                </div>
-            </div>
-        </div>
-    }
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Periodicity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Format)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Color)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Volume)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PricePerMonth)
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>*@
 </body>

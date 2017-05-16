@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 
 using Ninject;
+using Periodicals.BLL.Interfaces;
+using Periodicals.BLL.Services;
 using Periodicals.DAL.Repository.Abstract;
 using Periodicals.DAL.Repository.Concrete;
 
@@ -29,6 +31,7 @@ namespace Periodicals.Util
         private void AddBindings()
         {
             _kernel.Bind<IRepositoryFactory>().To<EFRepositoryFactory>().WithConstructorArgument("ApplicationDbContext");
+            _kernel.Bind<IStatisticService>().To<StatisticService>();
         }
     }
 }

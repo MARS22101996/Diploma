@@ -19,11 +19,11 @@
         @Html.HiddenFor(model => model.PublicationId)
         <div class="form-group">
             <label id="avatar" class="control-label col-md-2">Аватар</label>
-            <div class="col-md-10">
-                <img width="150" src="@Url.Action("GetImagePublication",  new {id = Model.PublicationId})" />
+            <div class="col-md-10 text-center">
+                <img width="150" src="@Url.Action("GetImagePublication", new {id = Model.PublicationId})"/>
                 <div>
                     Загрузить новое изображение:
-                    <input type="file" name="File" class="form-control" accept="image/*" />
+                    <input type="file" name="File" class="form-control" accept="image/*"/>
                 </div>
             </div>
         </div>

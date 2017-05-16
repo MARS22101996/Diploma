@@ -1,34 +1,37 @@
-﻿body {
-}
-img{
+﻿img{
      width: 200px;
 }
+
 #firstpage {
-    
            background:  url(../img/First.jpg);
            background-size: auto 1260px;
-           min-height: 1250px;
-        }
+           min-height: 1300px;
+}
+
 .conteiner
 {
 	 min-height:250px;
+
 }
+
 .pic {
     float: left; 
    /* Обтекание картинки текстом */
    }
    .text {
     margin-left: 250px; /* Отступ от левого края */
+    background: rgba(255, 255, 255, 0.6); 
    }
+
  h2
 {
-    color:	#B22222; 
-    font-weight: 800;
+    font-weight: 500;
     text-align: center;  
-    background:  url(../img/tekstura_pergamenta_pergament_2000x1333.jpg);
+    /*font-family: 'Great Vibes', serif;*/
     padding: 2px; /* Поля вокруг текста */
     font-style: italic; 
 }
+
  p
 {
 font-family:Comic Sans, Comic Sans MS, cursive;
@@ -38,11 +41,11 @@ font-style: italic;
 }
  .content
  {
-     min-height: 625px;
+     background:  url(../img/folha_caderno.jpg);
+     min-height: 620px;
  }
  .fortable
  {
-      background:  url(../img/pergament.jpg);
       background-size: cover;
       min-height: 170px;
  }

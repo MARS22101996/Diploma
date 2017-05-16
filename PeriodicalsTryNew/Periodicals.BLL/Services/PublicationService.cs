@@ -91,5 +91,11 @@ namespace Periodicals.BLL.Services
         {
             return factory.PublicationRepository.Get().Any(c => c.NameOfPublication == name);
         }
+
+
+        public static List<Publication> GetPublicationsByNameAndDate(IRepositoryFactory factory, int id)
+        {
+            return factory.PublicationRepository.Get().Where(a => a.Topics.Any(c => c.TopicId == id)).ToList();
+        }
     }
 }

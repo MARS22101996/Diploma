@@ -65,10 +65,11 @@
                     {
                         <li>@Html.ActionLink("Подписки", "IndexByName", "UserPublications")</li>
                     }
-
-                    <li>@Html.ActionLink("Каталог", "GeneratePDF", "Publications")</li>
-                    <li>@Html.ActionLink("О нас", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    
+                    <li> @Html.ActionLink("Статистика", "Dashboard", "Statistic") </li>
+                    <li> @Html.ActionLink("Каталог", "GeneratePDF", "Publications") </li>
+                    <li> @Html.ActionLink("О нас", "About", "Home") </li>
+                    <li> @Html.ActionLink("Контакты", "Contact", "Home") </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -168,7 +169,7 @@
     @Scripts.Render("~/bundles/custom")
     @Scripts.Render("~/bundles/bootstrap")
 <!-- jQuery -->
-    <script src="~/Scripts/js/jquery.js"></script>
+    @*<script src="~/Scripts/js/jquery.js"></script>*@
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Scripts/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
