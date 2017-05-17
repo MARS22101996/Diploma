@@ -12,7 +12,7 @@
 
     var selectors = {
         userName: "[data-name-input]",
-        startDate: "[data-date-input]"
+        startDate: "[#start-date-input]"
     };
 
     function getStatistic() {
@@ -25,15 +25,15 @@
                     var sendModel = {
                         url: $(this).attr("data-url"),
                         userNameValue: $(selectors.userName).val(),
-                        startDateValue: $(selectors.startDate).val()
+                        startDateValue: $("#start-date-input").val()
                     };
 
                     $.ajax({
                             url: sendModel.url,
                             type: "get",
                             data: {
-                                userName: sendModel.userNameValue,
-                                startDate: sendModel.startDateValue
+                                year: sendModel.userNameValue,
+                                month: sendModel.startDateValue
                             }
                         })
                         .done(function(jsonString) {
@@ -42,10 +42,9 @@
                             if (jsonData == null) {
                                 cleanStatistic();
                             } else {
-                                showTicketDates(jsonData);
                                 showPrices(jsonData);
                                 showColors(jsonData);
-                                //showTable(jsonData);
+                                showTable(jsonData);
                             }
                         })
                         .fail(function(error) { console.log(error) });
@@ -58,8 +57,7 @@
                 "[data-chartPriority]")
             .html("");
 
-        $("[data-is-statistic-container]").html("<h2>No data</h2>");
-            //.html($("[data-NotFound]").html());
+        $("[data-is-statistic-container]").html("<h2>No data</h2>");         
     }
 
     function showTable(jsonData) {
@@ -68,33 +66,7 @@
 
         var mustacheToHtml = Mustache.to_html(statisticTableTemplateHtml, jsonData);
 
-        //var mustasheToHtml = (function (statisticTableTemplateHtml, jsonData) {
-        //    Mustache.to_html(statisticTableTemplateHtml, jsonData);
-        //})(statisticTableTemplateHtml, jsonData);
-
         statisticTableContainer.html(mustacheToHtml);
-    }
-
-    function showTicketDates(jsonData) {
-        var data;
-        var chart;
-        var chartDiv;
-
-        var options = {
-            "title": "Report by date",
-            "vAxis": { "title": "Count" },
-            "hAxis": { "title": "Date" },
-            "legend": "none",
-            "colors": ["#ff4000"]
-        };
-
-        data = new google.visualization.DataTable();
-        data.addColumn("string", "Date");
-        data.addColumn("number", "Count");
-        setData(data, jsonData.DateCountDictionary);
-        chartDiv = $("[data-chartDate]")[0];
-        chart = new google.visualization.AreaChart(chartDiv);
-        chart.draw(data, options);
     }
 
     function showColors(jsonData) {
@@ -103,7 +75,7 @@
         var chartDiv;
 
         var options = {
-            "title": "Report by status",
+            "title": "Отчет по видам",
             "height": 400,
             "pieHole": 0.4
         };
@@ -123,7 +95,7 @@
         var chartDiv;
 
         var options = {
-            "title": "Report by priority",
+            "title": "Отчет по ценам",
             "height": 400
         };
 

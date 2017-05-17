@@ -32,8 +32,7 @@ namespace Periodicals
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/small-business.css",
-                      "~/Content/css/detail-page.css",
-                      "~/Content/css/all.css"));
+                      "~/Content/css/detail-page.css"));
         }
     }
 }

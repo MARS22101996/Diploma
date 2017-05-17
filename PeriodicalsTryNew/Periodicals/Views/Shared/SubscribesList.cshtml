@@ -1,26 +1,29 @@
 ﻿
-@*<script data-is-table-statistic="true" type="text-template">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Text</th>
-                <th>Status</th>
-                <th>Priority</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#Tickets}}
-            <tr>
-                <td>{{CreationDate}}</td>
-                <td>{{Name}}</td>
-                <td>{{Text}}</td>
-                <td>{{Status}}</td>
-                <td>{{Priority}}</td>
-            </tr>
-            {{/Tickets}}
-        </tbody>
-    </table>
-</script>*@
+<script data-is-table-statistic="true" type="text-template">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                    <th>NameOfPublication</th>
+                    <th>Price</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>                   
+                </tr>
+            </thead>
+            <tbody>
+                {{#Subscribes}}
+                <tr>
+                    <td>{{StartDate}}</td>
+                    <td>{{EndDate}}</td>
+                    <td>{{Publication.NameOfPublication}}</td>
+                    <td>{{Publication.PricePerMonth}}</td>
+                    <td>{{User.FirstName}}</td>
+                    <td>{{User.LastName}}</td>
+                </tr>
+                {{/Subscribes}}
+            </tbody>
+        </table>
+    <h2> Сумма {{Sum}} грн. </h2>
+    </script>
 

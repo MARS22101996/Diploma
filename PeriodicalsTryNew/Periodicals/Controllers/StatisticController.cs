@@ -25,27 +25,71 @@ namespace Periodicals.Controllers
 
         [HttpGet]
         public ActionResult Dashboard()
-        {
-            const int defaultStatisticDays = 14;
-
+        {         
             var model = new DashboardViewModel
             {
-                StartDate = DateTime.UtcNow.AddDays(-defaultStatisticDays)
+                StartYear = 2016
             };
 
             return View(model);
         }
 
         [HttpGet]
-        public JsonResult GetStatistic(string userName, DateTime startDate)
+        public JsonResult GetStatistic(int year, int month)
         {
             UserStatisticDto statistic;
-
+            int day = 1;
+            switch (month)
+            {
+                case 1:
+                    day = 31;
+                    break;
+                case 2:
+                    {
+                        if (year == 2016 || year == 2012) day = 28;
+                        else day = 28;
+                        break;
+                    }
+                case 3:
+                    day = 31;
+                    break;
+                case 4:
+                    day = 30;
+                    break;
+                case 5:
+                    day = 31;
+                    break;
+                case 6:
+                    day = 30;
+                    break;
+                case 7:
+                    day = 31;
+                    break;
+                case 8:
+                    day = 31;
+                    break;
+                case 9:
+                    day = 30;
+                    break;
+                case 10:
+                    day = 31;
+                    break;
+                case 11:
+                    day = 30;
+                    break;
+                case 12:
+                    day = 31;
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            DateTime date = new DateTime(year, month, day, 0, 0, 0);
             try
             {
-                statistic = _statisticService.GetStatisticFiltered(_factory,userName, startDate);
+                statistic = _statisticService.GetStatisticFiltered(_factory, date);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return Json(null);
             }
@@ -60,17 +104,6 @@ namespace Periodicals.Controllers
             var modelJson = JsonConvert.SerializeObject(statistic, jsonSettings);
 
             return Json(modelJson, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult AutocompleteSearch(string term)
-        {
-            var model = _factory.PublicationRepository.Get().
-                Where(a => a.NameOfPublication.ToLower().
-                Contains(term.ToLower())).
-                Select(a => a.NameOfPublication).ToList();
-
-            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

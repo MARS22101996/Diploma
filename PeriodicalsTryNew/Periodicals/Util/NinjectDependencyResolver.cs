@@ -9,6 +9,7 @@ using Periodicals.BLL.Interfaces;
 using Periodicals.BLL.Services;
 using Periodicals.DAL.Repository.Abstract;
 using Periodicals.DAL.Repository.Concrete;
+using AutoMapper;
 
 namespace Periodicals.Util
 {
@@ -31,7 +32,7 @@ namespace Periodicals.Util
         private void AddBindings()
         {
             _kernel.Bind<IRepositoryFactory>().To<EFRepositoryFactory>().WithConstructorArgument("ApplicationDbContext");
-            _kernel.Bind<IStatisticService>().To<StatisticService>();
+            _kernel.Bind<IStatisticService>().To<StatisticService>();            
         }
     }
 }

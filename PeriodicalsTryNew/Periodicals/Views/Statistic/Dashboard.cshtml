@@ -1,33 +1,45 @@
 ﻿@using System.Threading.Tasks
 @model Periodicals.ViewModels.DashboardViewModel
-<h2>Statistics</h2>
+<h2>Статистика</h2>
 <hr />
 
 <div class="form-horizontal">
-    <form>
-        <div class="form-group">
-            <label class="col-md-2 control-label">User</label>
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input id="user-name-input" data-name-input="true" asp-for="User" type="text" data-autocomplete-source='@Url.Action("AutocompleteSearch", "Statistic")' class="form-control" />
-                </div>
-                <span asp-validation-for="User" class="text-danger"></span>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartYear, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="user-name-input" data-name-input="true" asp-for="StartYear" type="text" class="form-control" />           
+            @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">Start date</label>
-            <div class="col-md-6">
-                <input data-startDate id="start-date-input" data-date-input="true" asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-md-2">Месяц</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Month, new SelectList(
+                  new List<Object>{
+                       new { value = 1 , text = "Январь"  },
+                       new { value = 2 , text = "Февраль" },
+                       new { value = 3 , text = "Март" },
+                       new { value = 4 , text = "Апрель"},
+                       new { value = 5 , text = "Май" },
+                       new { value = 6 , text = "Июнь"},
+                       new { value = 7 , text = "Июль"},
+                       new { value = 8 , text = "Август" },
+                       new { value = 9 , text = "Cентябрь"},
+                       new { value = 10 , text = "Октябрь"},
+                       new { value = 11 , text = "Ноябрь" },
+                       new { value = 12 , text = "Декабрь" },
+                    },
+                  "value",
+                  "text",
+                   "1"), new { @class = "form-control", @id = "start-date-input" })
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-6">
-                <input data-statistic type="submit" value="Find" class="btn btn-default"
+    </div>
+   
+                <input data-statistic type="submit" value="Поиск" class="btn btn-default"
                        data-url='@Url.Action("GetStatistic", "Statistic")' />
-            </div>
-        </div>
-    </form>
+
+    </div>    
 
     <div class="row">
         <div data-chartDate></div>
@@ -39,10 +51,7 @@
 
     <div data-is-statistic-container="true"></div>
     @Html.Partial("~/Views/Shared/SubscribesList.cshtml")
-    @*<template data-notFound="notFound">
-            <h2>No data</h2>
-        </template>*@
-</div>
+
 
 @section scripts {
 

@@ -4,12 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Periodicals.ViewModels
 {
     public class DashboardViewModel
-    {
-        [Required]
-        public string User { get; set; }
+    {       
+        [Display(Name = "Год")]
+        [Range(2000, 2017, ErrorMessage = "Значение {0} должно быть между {1} и текущим годом")]
+        public int StartYear { get; set; }
 
-        [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime StartDate { get; set; }
+        public int Month { get; set; }
     }
 }

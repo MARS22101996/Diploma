@@ -10,6 +10,6 @@ namespace Periodicals.BLL.Interfaces
 {
     public interface IStatisticService
     {
-        UserStatisticDto GetStatisticFiltered(IRepositoryFactory factory,string userName, DateTime startDate);
+        UserStatisticDto GetStatisticFiltered(IRepositoryFactory factory, DateTime date);
     }
 }

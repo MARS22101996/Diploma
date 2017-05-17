@@ -12,6 +12,8 @@ namespace Periodicals.BLL.Dto
 
         public IDictionary<string, int> ColorCountDictionary { get; set; }
 
-        public IEnumerable<UserPublication> Subscribes { get; set; }
+        public IEnumerable<UserPublicationDto> Subscribes { get; set; }
+
+        public double Sum { get; set; }
     }
 }
