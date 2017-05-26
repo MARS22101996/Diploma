@@ -51,6 +51,42 @@
                 });
     }
 
+    function getStatisticPdf() {
+        $("[data-statistic-pdf]")
+            .on("click",
+                function (event) {
+                    event.preventDefault();
+                    var jsonData;
+
+                    var sendModel = {
+                        url: $(this).attr("data-url-pdf"),
+                        userNameValue: $(selectors.userName).val(),
+                        startDateValue: $("#start-date-input").val()
+                    };
+
+                    $.ajax({
+                        url: sendModel.url,
+                        type: "get",
+                        data: {
+                            year: sendModel.userNameValue,
+                            month: sendModel.startDateValue
+                        }
+                    })
+                        .done(function (jsonString) {
+                            jsonData = JSON.parse(jsonString);
+
+                            if (jsonData == null) {
+                                cleanStatistic();
+                            } else {
+                                showPrices(jsonData);
+                                showColors(jsonData);
+                                showTable(jsonData);
+                            }
+                        })
+                        .fail(function (error) { console.log(error) });
+                });
+    }
+
     function cleanStatistic() {
         $("[data-chartDate], " +
                 "[data-chartStatus], " +

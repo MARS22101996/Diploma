@@ -1,13 +1,13 @@
 ﻿@using System.Threading.Tasks
+@using System.Web.UI.WebControls
 @model Periodicals.ViewModels.DashboardViewModel
 <h2>Статистика</h2>
 <hr />
-
 <div class="form-horizontal">
     <div class="form-group">
         @Html.LabelFor(model => model.StartYear, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input id="user-name-input" data-name-input="true" asp-for="StartYear" type="text" class="form-control" />           
+            <input id="user-name-input" data-name-input="true" asp-for="StartYear" type="text" class="form-control" />
             @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -36,10 +36,10 @@
         </div>
     </div>
    
-                <input data-statistic type="submit" value="Поиск" class="btn btn-default"
-                       data-url='@Url.Action("GetStatistic", "Statistic")' />
-
-    </div>    
+    <input data-statistic type="submit" value="Поиск" class="btn btn-default"
+           data-url='@Url.Action("GetStatistic", "Statistic")' />
+     @Html.ActionLink("Oтчет", "GeneratePdf", new { year=Model.StartYear, month = 2}, new { @class = "btn btn-default" })
+    </div>
 
     <div class="row">
         <div data-chartDate></div>

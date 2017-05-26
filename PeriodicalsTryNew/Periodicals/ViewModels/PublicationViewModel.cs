@@ -40,6 +40,7 @@ namespace Periodicals.ViewModels
         public double PricePerMonth { get; set; }
  
         public virtual ICollection<Topic> AllTopics { get; set; }
+
         public string[] OwnTopics{ get; set; }
     }
 }

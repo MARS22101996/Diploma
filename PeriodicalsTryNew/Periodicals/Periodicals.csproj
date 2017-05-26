@@ -249,6 +249,7 @@
     <Compile Include="ViewModels\StatisticViewModel.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\UserPublicationViewModel.cs" />
+    <Compile Include="ViewModels\UserStatisticViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +423,7 @@
     <Content Include="Views\Shared\_LayoutOther.cshtml" />
     <Content Include="Views\Statistic\Dashboard.cshtml" />
     <Content Include="Views\Shared\SubscribesList.cshtml" />
+    <Content Include="Views\Statistic\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,45 @@
+﻿@using System.Threading.Tasks
+@model Periodicals.ViewModels.UserStatisticViewModel
+<h2>Статистика</h2>
+<hr />
+@{
+    Layout = null;
+}
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Начальная дата</th>
+            <th>Конечная дата</th>
+            <th>Название</th>
+            <th>Цена, мес</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+        </tr>
+        <tbody>
+        @foreach (var item in Model.Subscribes)
+        {
+            <tr>
+                <td>@item.StartDate.Date</td>
+                <td>@item.EndDate.Date</td>
+                <td>@Html.DisplayFor(modelItem => item.Publication.NameOfPublication)</td>
+                <td>@Html.DisplayFor(modelItem => item.Publication.PricePerMonth)</td>
+                <td>@Html.DisplayFor(modelItem => item.User.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.User.LastName)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <h2> Сумма @Model.Sum грн. </h2>
+</div>
+</body>

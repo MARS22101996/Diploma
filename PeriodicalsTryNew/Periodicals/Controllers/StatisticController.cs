@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Periodicals.BLL.Dto;
@@ -104,6 +105,74 @@ namespace Periodicals.Controllers
             var modelJson = JsonConvert.SerializeObject(statistic, jsonSettings);
 
             return Json(modelJson, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ViewResult GetStatisticPdf(int year, int month)
+        {
+            int day = 1;
+            switch (month)
+            {
+                case 1:
+                    day = 31;
+                    break;
+                case 2:
+                    {
+                        if (year == 2016 || year == 2012) day = 28;
+                        else day = 28;
+                        break;
+                    }
+                case 3:
+                    day = 31;
+                    break;
+                case 4:
+                    day = 30;
+                    break;
+                case 5:
+                    day = 31;
+                    break;
+                case 6:
+                    day = 30;
+                    break;
+                case 7:
+                    day = 31;
+                    break;
+                case 8:
+                    day = 31;
+                    break;
+                case 9:
+                    day = 30;
+                    break;
+                case 10:
+                    day = 31;
+                    break;
+                case 11:
+                    day = 30;
+                    break;
+                case 12:
+                    day = 31;
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            DateTime date = new DateTime(year, month, day, 0, 0, 0);
+           
+                var statistic = _statisticService.GetStatisticFiltered(_factory, date);
+
+            var model = new UserStatisticViewModel
+            {
+                Subscribes = statistic.Subscribes,
+                Sum = statistic.Sum
+            };
+
+            return View("Report", model);
+        }
+
+        public ActionResult GeneratePdf(int year, int month)
+        {
+            return new Rotativa.ActionAsPdf("GetStatisticPdf", new { year, month });
         }
     }
 }
