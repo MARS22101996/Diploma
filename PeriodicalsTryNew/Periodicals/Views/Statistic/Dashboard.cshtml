@@ -46,8 +46,6 @@
     </div>
     <input data-statistic type="submit" value="Поиск" class="btn btn-default"
            data-url='@Url.Action("GetStatistic", "Statistic")' />
-    @*<input data-statistic-pdf type="button" value="Oтчет" class="btn btn-default"
-           data-url-pdf='@Url.Action("GeneratePdf", "Statistic")' />*@
     @{ 
         var month = Model.Month.ToString();
         var year = Model.StartYear.ToString();

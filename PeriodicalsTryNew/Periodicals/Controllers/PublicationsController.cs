@@ -78,8 +78,7 @@ namespace Periodicals.Controllers
             }
         }
         public ActionResult GeneratePDF()
-        {
-     
+        {     
             return new Rotativa.ActionAsPdf("CatalogPublications") /*{ FileName = "CatalogScriptMedia.pdf" }*/;
         }
         [HttpPost]
@@ -140,7 +139,7 @@ namespace Periodicals.Controllers
                     return PartialView("SearchError");
                 }
 
-                return PartialView("PublicationSearchWithoutTopic", publicationsWhichContainTheNameWithoutTopic);
+                return PartialView("PublicationSearch", publicationsWhichContainTheNameWithoutTopic);
             }
             catch (Exception ex)
             {
@@ -155,7 +154,7 @@ namespace Periodicals.Controllers
             try
             {
                 var publicationsOrderedByNameWithoutTopic = PublicationService.PublicationsOrderedByNameWithoutTopic(_factory);
-                return PartialView("OrderByNameWithoutTopic", publicationsOrderedByNameWithoutTopic);
+                return PartialView("OrderByName", publicationsOrderedByNameWithoutTopic);
             }
             catch (Exception ex)
             {
@@ -169,7 +168,7 @@ namespace Periodicals.Controllers
             try
             {
                 var publicationsOrderedByPriceWithoutTopics = PublicationService.PublicationsOrderedByPriceWithoutTopic(_factory);
-                return PartialView("OrderByPriceWithoutTopic", publicationsOrderedByPriceWithoutTopics);
+                return PartialView("OrderByPrice", publicationsOrderedByPriceWithoutTopics);
             }
             catch (Exception ex)
             {

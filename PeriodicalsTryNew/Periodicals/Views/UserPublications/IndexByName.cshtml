@@ -167,6 +167,8 @@ new SelectList(ViewBag.AllPublications as IEnumerable<Publication>, "Publication
             <h3>Всего : @ViewBag.SumPayed грн.</h3>
 
         </div>
-
+@section scripts
+{
         @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
         @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

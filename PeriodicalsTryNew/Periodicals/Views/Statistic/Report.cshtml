@@ -57,7 +57,7 @@
             google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var options = {
-                    "title": "Статистика по цене в месяц (количество)",
+                    "title": "Статистика по цене в месяц ( грн.)",
                     'height': 400
                 };
                 var data = new google.visualization.DataTable();
@@ -100,8 +100,8 @@
                 @foreach (var item in Model.Subscribes)
                 {
                     <tr>
-                        <td>@item.StartDate.Date</td>
-                        <td>@item.EndDate.Date</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
                         <td>@Html.DisplayFor(modelItem => item.Publication.NameOfPublication)</td>
                         <td>@Html.DisplayFor(modelItem => item.Publication.PricePerMonth)</td>
                         <td>@Html.DisplayFor(modelItem => item.User.FirstName)</td>

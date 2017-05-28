@@ -68,12 +68,12 @@
                 int ch = 0;
             }
 
-            <div id="products" class="row list-group">
+            @*<div id="products" class="row list-group">*@
                 @foreach (var item in Model)
             {
                 i++;
-                    <div class="item  col-xs-4 col-lg-4">
-                        <div class="thumbnail">
+                    <div class="col-sm-4 col-lg-4 col-md-4 padding">
+                        <div class="border thumbnail">
                             <a href="@Url.Action("Details", new {id = item.PublicationId})">
                                 <img class="group list-group-image" src="@Url.Action("GetImagePublication", new {id = item.PublicationId})" alt="" />
                             </a>
@@ -88,14 +88,14 @@
                                 <p class="group inner list-group-item-text">
                                     @if (item.Description.Length < 200)
                                     {
-                                    <p>
+                                    <p class="description">
                                         @item.Description
 
                                     </p>
                                     }
                                     else
                                     {
-                                        <p>
+                                        <p class="description">
                                             @item.Description.Substring(0, 200)
 
                                             ...
@@ -103,7 +103,7 @@
                                     }
                                     </p>
                                     <hr />
-                                    <div class="row">
+                                    <div @*class="row"*@>
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <span>@Html.ActionLink("Редактировать", "Edit", new { id = item.PublicationId }, new { @class = "btn btn-default" })</span>
@@ -111,7 +111,7 @@
                                         }
 
                                     </div>
-                                    <div class="row">
+                                    <div @*class="row"*@>
                                         @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin") && !User.IsInRole("Support"))
                                         {
                                             string namediv = "result" + i;
@@ -178,11 +178,12 @@
                 }
             </div>
         </div>
-    </div>
+    @*</div>*@
 
+
+@section Scripts {
 @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $('#op-accept').click(function() {

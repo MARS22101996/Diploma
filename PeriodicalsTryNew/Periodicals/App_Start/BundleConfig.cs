@@ -11,7 +11,8 @@ namespace Periodicals
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js",
-                        "~/Scripts/jquery-ui.unobtrusive.js"));
+                        "~/Scripts/jquery-ui.unobtrusive.js",
+                        "~/Content/dist/sweetalert.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -32,7 +33,8 @@ namespace Periodicals
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/small-business.css",
-                      "~/Content/css/detail-page.css"));
+                      "~/Content/css/detail-page.css",
+                      "~/Content/dist/sweetalert.css"));
         }
     }
 }

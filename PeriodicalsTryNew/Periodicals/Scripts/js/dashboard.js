@@ -78,17 +78,17 @@
                         
         //        });
     //}
-    $("[data-statistic-pdf]")
-        .on("click",
-            function (event) {
-                event.preventDefault();
-                var sendModel = {
-                    url: $(this).attr("data-url-pdf"),
-                    userNameValue: $("#user-name-input").val(),
-                    startDateValue: $("#start-date-input").val()
-                };
-                $.get(sendModel.url, { year: sendModel.userNameValue, month: sendModel.startDateValue });
-            });
+    //$("[data-statistic-pdf]")
+    //    .on("click",
+    //        function (event) {
+    //            event.preventDefault();
+    //            var sendModel = {
+    //                url: $(this).attr("data-url-pdf"),
+    //                userNameValue: $("#user-name-input").val(),
+    //                startDateValue: $("#start-date-input").val()
+    //            };
+    //            $.get(sendModel.url, { year: sendModel.userNameValue, month: sendModel.startDateValue });
+    //        });
     //}
     //function Pdf() {
     //    $.get("/Statistic/GeneratePdf", { year: $("#user-name-input").val(), month: $("#start-date-input").val() });
@@ -138,7 +138,7 @@
         var chartDiv;
 
         var options = {
-            "title": "Статистика по цене в месяц (количество)",
+            "title": "Статистика по цене в месяц (грн.)",
             "height": 400
         };
 
