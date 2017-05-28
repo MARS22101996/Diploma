@@ -11,7 +11,7 @@
     }
 
     var selectors = {
-        userName: "[data-name-input]",
+        userName: "[#user-name-input]",
         startDate: "[#start-date-input]"
     };
 
@@ -24,7 +24,7 @@
 
                     var sendModel = {
                         url: $(this).attr("data-url"),
-                        userNameValue: $(selectors.userName).val(),
+                        userNameValue: $("#user-name-input").val(),
                         startDateValue: $("#start-date-input").val()
                     };
 
@@ -51,41 +51,48 @@
                 });
     }
 
-    function getStatisticPdf() {
-        $("[data-statistic-pdf]")
-            .on("click",
-                function (event) {
-                    event.preventDefault();
-                    var jsonData;
+    //function getStatisticPdf() {
+        //$("[data-statistic-pdf]")
+        //    .on("click",
+        //        function (event) {
+        //            event.preventDefault();
+                   
+        //            var sendModel = {
+        //                url: $(this).attr("data-url-pdf"),
+        //                userNameValue: $("#user-name-input").val(),
+        //                startDateValue: $("#start-date-input").val()
+        //            };
 
-                    var sendModel = {
-                        url: $(this).attr("data-url-pdf"),
-                        userNameValue: $(selectors.userName).val(),
-                        startDateValue: $("#start-date-input").val()
-                    };
-
-                    $.ajax({
-                        url: sendModel.url,
-                        type: "get",
-                        data: {
-                            year: sendModel.userNameValue,
-                            month: sendModel.startDateValue
-                        }
-                    })
-                        .done(function (jsonString) {
-                            jsonData = JSON.parse(jsonString);
-
-                            if (jsonData == null) {
-                                cleanStatistic();
-                            } else {
-                                showPrices(jsonData);
-                                showColors(jsonData);
-                                showTable(jsonData);
-                            }
-                        })
-                        .fail(function (error) { console.log(error) });
-                });
-    }
+        //            $.ajax({
+        //                url: sendModel.url,
+        //                type: "get",
+        //                data: {
+        //                    year: sendModel.userNameValue,
+        //                    month: sendModel.startDateValue
+        //                },
+        //                 datatype: 'html',
+        //                 success: function (data) {
+        //                     $(html).html(data);
+        //                 }
+        //            });
+                        
+        //        });
+    //}
+    $("[data-statistic-pdf]")
+        .on("click",
+            function (event) {
+                event.preventDefault();
+                var sendModel = {
+                    url: $(this).attr("data-url-pdf"),
+                    userNameValue: $("#user-name-input").val(),
+                    startDateValue: $("#start-date-input").val()
+                };
+                $.get(sendModel.url, { year: sendModel.userNameValue, month: sendModel.startDateValue });
+            });
+    //}
+    //function Pdf() {
+    //    $.get("/Statistic/GeneratePdf", { year: $("#user-name-input").val(), month: $("#start-date-input").val() });
+    //};
 
     function cleanStatistic() {
         $("[data-chartDate], " +
@@ -93,7 +100,7 @@
                 "[data-chartPriority]")
             .html("");
 
-        $("[data-is-statistic-container]").html("<h2>No data</h2>");         
+        $("[data-is-statistic-container]").html("<h2>Нет данных</h2>");         
     }
 
     function showTable(jsonData) {
@@ -111,7 +118,7 @@
         var chartDiv;
 
         var options = {
-            "title": "Отчет по видам",
+            "title": "Статистика по виду (количество)",
             "height": 400,
             "pieHole": 0.4
         };
@@ -131,7 +138,7 @@
         var chartDiv;
 
         var options = {
-            "title": "Отчет по ценам",
+            "title": "Статистика по цене в месяц (количество)",
             "height": 400
         };
 

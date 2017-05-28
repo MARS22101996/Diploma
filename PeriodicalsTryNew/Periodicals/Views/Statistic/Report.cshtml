@@ -14,32 +14,104 @@
     <meta name="author" content="">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://www.google.com/jsapi"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    <script type="text/javascript">
+
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+               var options = {
+                    'title': 'Статистика по виду (количество)',
+                    'height': 400,
+                    'pieHole': 0.4,
+                };
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Товар');
+                data.addColumn('number', 'Стоимость');
+                $.getJSON('@Url.Action("GetColorData", "Statistic",  new { data = Model.Year+" "+Model.MonthInt })', null,
+                                                            function (result) {
+                                                                if (result.Countries.length) {
+                                                                    $.each(result.Countries, function (index, c) {
+                                                                        data.addRow(
+                                                                            [c.Color, c.Count]
+                                                                         );
+                                                                    });
+                                                                    // Отрисовка диаграммы
+                                                                    var chart = new google.visualization.PieChart(
+                                                                                         document.getElementById('chart_div'));
+                                                                    chart.draw(data, options);
+                                                                };
+                                                            });
+            }
+    </script>
+
+    <script type="text/javascript">
+            // Подгружаем API
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+            // Устанавливаем callback
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var options = {
+                    "title": "Статистика по цене в месяц (количество)",
+                    'height': 400
+                };
+                var data = new google.visualization.DataTable();
+                data.addColumn("string", "Priority");
+                data.addColumn("number", "Count");
+                $.getJSON('@Url.Action("GetPriceData", "Statistic",  new { data = Model.Year+" "+Model.MonthInt })', null,
+                                                            function (result) {
+                                                                if (result.Countries.length) {
+                                                                    $.each(result.Countries, function (index, c) {
+                                                                        data.addRow(
+                                                                            [c.Price, c.Count]
+                                                                         );
+                                                                    });
+                                                                    // Отрисовка диаграммы
+                                                                    var chart = new google.visualization.PieChart(
+                                                                                         document.getElementById('chart_div1'));
+                                                                    chart.draw(data, options);
+                                                                };
+                                                            });
+            }
+    </script>
 </head>
 <body>
-<div class="container">
-    <table class="table table-striped">
-        <tr>
-            <th>Начальная дата</th>
-            <th>Конечная дата</th>
-            <th>Название</th>
-            <th>Цена, мес</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-        </tr>
-        <tbody>
-        @foreach (var item in Model.Subscribes)
-        {
+    <div class="container-fluid">
+        <H2> Отчет за @Model.Month @Model.Year года</H2>
+        <div class="row">
+            <div id="chart_div" class="col-xs-6"></div>
+            <div id="chart_div1" class="col-xs-6"></div>
+        </div>
+        <table class="table table-striped">
             <tr>
-                <td>@item.StartDate.Date</td>
-                <td>@item.EndDate.Date</td>
-                <td>@Html.DisplayFor(modelItem => item.Publication.NameOfPublication)</td>
-                <td>@Html.DisplayFor(modelItem => item.Publication.PricePerMonth)</td>
-                <td>@Html.DisplayFor(modelItem => item.User.FirstName)</td>
-                <td>@Html.DisplayFor(modelItem => item.User.LastName)</td>
+                <th>Начальная дата</th>
+                <th>Конечная дата</th>
+                <th>Название</th>
+                <th>Цена, мес</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
             </tr>
-        }
-        </tbody>
-    </table>
-    <h2> Сумма @Model.Sum грн. </h2>
-</div>
+            <tbody>
+                @foreach (var item in Model.Subscribes)
+                {
+                    <tr>
+                        <td>@item.StartDate.Date</td>
+                        <td>@item.EndDate.Date</td>
+                        <td>@Html.DisplayFor(modelItem => item.Publication.NameOfPublication)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Publication.PricePerMonth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.User.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.User.LastName)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h2> Сумма @Model.Sum грн. </h2>
+    </div>
+
 </body>
+

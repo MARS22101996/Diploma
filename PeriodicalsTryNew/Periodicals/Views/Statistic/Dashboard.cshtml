@@ -7,7 +7,16 @@
     <div class="form-group">
         @Html.LabelFor(model => model.StartYear, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input id="user-name-input" data-name-input="true" asp-for="StartYear" type="text" class="form-control" />
+            @*<input id="user-name-input" data-name-input="true" asp-for="StartYear" type="text" class="form-control" />*@
+            @Html.DropDownListFor(model => model.Month, new SelectList(
+                  new List<Object>{
+                       new { value = 2015 , text = "2015" },
+                       new { value = 2016 , text = "2016" },
+                       new { value = 2017 , text = "2017" },                  
+                    },
+                  "value",
+                  "text",
+                   2015), new { @class = "form-control", @id = "user-name-input" })
             @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -32,13 +41,18 @@
                     },
                   "value",
                   "text",
-                   "1"), new { @class = "form-control", @id = "start-date-input" })
+                   1), new { @class = "form-control", @id = "start-date-input" })
         </div>
     </div>
-   
     <input data-statistic type="submit" value="Поиск" class="btn btn-default"
            data-url='@Url.Action("GetStatistic", "Statistic")' />
-     @Html.ActionLink("Oтчет", "GeneratePdf", new { year=Model.StartYear, month = 2}, new { @class = "btn btn-default" })
+    @*<input data-statistic-pdf type="button" value="Oтчет" class="btn btn-default"
+           data-url-pdf='@Url.Action("GeneratePdf", "Statistic")' />*@
+    @{ 
+        var month = Model.Month.ToString();
+        var year = Model.StartYear.ToString();
+     }
+     @Html.ActionLink("Oтчет", "GeneratePdf", new { data = year + " " + month }, new { @class = "btn btn-default" })
     </div>
 
     <div class="row">
